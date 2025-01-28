@@ -154,7 +154,11 @@ namespace StageCode
 
         private void Supprimer(object sender, EventArgs e) => MessageBox.Show("Supprimer");
 
-        private void RedimensionnerSynoptique(object sender, EventArgs e) => MessageBox.Show("Redimensionner le synoptique");
+        private void RedimensionnerSynoptique(object sender, EventArgs e)
+        {
+            FormResize forme = new FormResize();
+            forme.ShowDialog();
+        }
 
         private void Proteger(object sender, EventArgs e) => MessageBox.Show("Protégé");
 

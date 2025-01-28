@@ -42,6 +42,7 @@
             btnVersion = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
+            panel1 = new Panel();
             MainMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -107,13 +108,13 @@
             // controlCommentToolStripMenuItem
             // 
             controlCommentToolStripMenuItem.Name = "controlCommentToolStripMenuItem";
-            controlCommentToolStripMenuItem.Size = new Size(180, 22);
+            controlCommentToolStripMenuItem.Size = new Size(169, 22);
             controlCommentToolStripMenuItem.Text = "Control comment";
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(180, 22);
+            aboutToolStripMenuItem.Size = new Size(169, 22);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -128,11 +129,19 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+            // panel1
+            // 
+            panel1.Location = new Point(0, 27);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(226, 123);
+            panel1.TabIndex = 1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel1);
             Controls.Add(MainMenu);
             MainMenuStrip = MainMenu;
             Name = "Form1";
@@ -160,5 +169,6 @@
         private SaveFileDialog saveFileDialog1;
         private ToolStripMenuItem controlCommentToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private Panel panel1;
     }
 }
