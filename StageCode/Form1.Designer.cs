@@ -28,18 +28,119 @@
         /// </summary>
         private void InitializeComponent()
         {
+            MainMenu = new MenuStrip();
+            btnFile = new ToolStripMenuItem();
+            btnEdition = new ToolStripMenuItem();
+            btnView = new ToolStripMenuItem();
+            btnInfos = new ToolStripMenuItem();
+            btnVersion = new ToolStripMenuItem();
+            openFileDialog1 = new OpenFileDialog();
+            saveFileDialog1 = new SaveFileDialog();
+            newToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
+            saveToolStripMenuItem = new ToolStripMenuItem();
+            saveAsToolStripMenuItem = new ToolStripMenuItem();
+            MainMenu.SuspendLayout();
             SuspendLayout();
+            // 
+            // MainMenu
+            // 
+            MainMenu.Items.AddRange(new ToolStripItem[] { btnFile, btnEdition, btnView, btnInfos, btnVersion });
+            MainMenu.Location = new Point(0, 0);
+            MainMenu.Name = "MainMenu";
+            MainMenu.Size = new Size(800, 24);
+            MainMenu.TabIndex = 0;
+            MainMenu.Text = "menuStrip1";
+            // 
+            // btnFile
+            // 
+            btnFile.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem });
+            btnFile.Name = "btnFile";
+            btnFile.Size = new Size(37, 20);
+            btnFile.Text = "File";
+            // 
+            // btnEdition
+            // 
+            btnEdition.Name = "btnEdition";
+            btnEdition.Size = new Size(56, 20);
+            btnEdition.Text = "Edition";
+            // 
+            // btnView
+            // 
+            btnView.Name = "btnView";
+            btnView.Size = new Size(44, 20);
+            btnView.Text = "View";
+            // 
+            // btnInfos
+            // 
+            btnInfos.Name = "btnInfos";
+            btnInfos.Size = new Size(45, 20);
+            btnInfos.Text = "Infos";
+            // 
+            // btnVersion
+            // 
+            btnVersion.Enabled = false;
+            btnVersion.Name = "btnVersion";
+            btnVersion.Size = new Size(29, 20);
+            btnVersion.Text = "V ";
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // newToolStripMenuItem
+            // 
+            newToolStripMenuItem.Name = "newToolStripMenuItem";
+            newToolStripMenuItem.Size = new Size(180, 22);
+            newToolStripMenuItem.Text = "New";
+            // 
+            // openToolStripMenuItem
+            // 
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Text = "Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Text = "Save";
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            saveAsToolStripMenuItem.Size = new Size(180, 22);
+            saveAsToolStripMenuItem.Text = "Save As";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(MainMenu);
+            MainMenuStrip = MainMenu;
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
+            MainMenu.ResumeLayout(false);
+            MainMenu.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private MenuStrip MainMenu;
+        private ToolStripMenuItem btnFile;
+        private ToolStripMenuItem btnEdition;
+        private ToolStripMenuItem btnView;
+        private ToolStripMenuItem btnInfos;
+        private ToolStripMenuItem btnVersion;
+        private OpenFileDialog openFileDialog1;
+        private ToolStripMenuItem newToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
+        private SaveFileDialog saveFileDialog1;
     }
 }
