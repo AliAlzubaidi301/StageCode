@@ -14,13 +14,20 @@ namespace StageCode
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.btnVersion.Text = "V " + Application.ProductVersion;
+            string tmp = Application.ProductVersion[0].ToString();
+            tmp += Application.ProductVersion[1].ToString();
+            tmp += Application.ProductVersion[2].ToString();
+            tmp += Application.ProductVersion[3].ToString();
+
+            this.btnVersion.Text = "V " + tmp;
 
             AjouterRaccourcisMenuFile();
             AjouterMenuEdition();
             AjouterbtnQuit();
             AjouterMenuVew();
             AppliquerLangue();
+
+            this.ClientSizeChanged += Form1_ClientSizeChanged;
         }
 
         #region Ajouter Menu File
@@ -325,5 +332,25 @@ namespace StageCode
             }
         }
         #endregion
+
+        #region Responsive
+
+        private void Form1_ClientSizeChanged(object sender, EventArgs e)
+        {
+            this.MainMenu.Width = (int)(this.ClientSize.Width * 0.95);
+            this.MainMenu.Height = (int)(this.ClientSize.Height * 0.05);
+
+            float fontSize = (this.ClientSize.Width * 0.02f + this.ClientSize.Height * 0.02f) / 2;
+
+            foreach (ToolStripMenuItem item in MainMenu.Items)
+            {
+                item.Font = new Font(item.Font.FontFamily, fontSize);
+            }
+        }
+
+
+
+        #endregion
+
     }
 }
