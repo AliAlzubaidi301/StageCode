@@ -167,6 +167,9 @@ namespace StageCode
             if (largeur > 0 && hauteur > 0)
             {
                 this.ClientSize = new Size(largeur, hauteur);
+
+                Form1_ClientSizeChanged(new object(), new EventArgs());
+                    
             }
             
         }
@@ -361,7 +364,7 @@ namespace StageCode
         private void Form1_ClientSizeChanged(object sender, EventArgs e)
         {
             this.MainMenu.Width = (int)(this.ClientSize.Width * 0.95);
-            this.MainMenu.Height = (int)(this.ClientSize.Height * 0.05);
+            this.MainMenu.Height = (int)(this.ClientSize.Height * 0.1);
 
             float fontSize = (this.ClientSize.Width * 0.02f + this.ClientSize.Height * 0.02f) / 2;
 
