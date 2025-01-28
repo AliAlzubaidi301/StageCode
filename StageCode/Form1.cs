@@ -86,7 +86,19 @@ namespace StageCode
 
         private void AjouterMenuVew()
         {
-            ToolStripMenuItem resolutionMenuItem = CreerMenuItem("Resolution", null, ChangerResolution);
+            ToolStripMenuItem resolutionMenuItem = CreerMenuItem("Resolution", null,null);
+
+            ToolStripMenuItem resolution1 = CreerMenuItem("Resolution 1 (640x480)", null, (sender, e) => ChangerResolution(640, 480));
+            ToolStripMenuItem resolution2 = CreerMenuItem("Resolution 2 (800x600)", null, (sender, e) => ChangerResolution(800, 600));
+            ToolStripMenuItem resolution3 = CreerMenuItem("Resolution 3 (1027x768)", null, (sender, e) => ChangerResolution(1024, 768));
+            ToolStripMenuItem resolution4 = CreerMenuItem("Resolution 4 (1240x1025)", null, (sender, e) => ChangerResolution(1240, 1024));
+
+            resolutionMenuItem.DropDownItems.AddRange(new ToolStripMenuItem[] {
+                resolution1,
+                resolution2,
+                resolution3,
+                resolution4
+            });
 
             ToolStripMenuItem languageMenuItem = new ToolStripMenuItem("Language");
             ToolStripMenuItem englishMenuItem = CreerMenuItem("English", null, (sender, e) => ChangerLangue(1));
@@ -118,7 +130,7 @@ namespace StageCode
 
         #region Méthodes Utilitaires
 
-        private ToolStripMenuItem CreerMenuItem(string text, Keys? shortcutKeys, EventHandler clickEvent)
+        private ToolStripMenuItem CreerMenuItem(string text, Keys? shortcutKeys, EventHandler? clickEvent)
         {
             ToolStripMenuItem menuItem = new ToolStripMenuItem(text);
             if (shortcutKeys.HasValue)
@@ -146,7 +158,14 @@ namespace StageCode
 
         private void Proteger(object sender, EventArgs e) => MessageBox.Show("Protégé");
 
-        private void ChangerResolution(object sender, EventArgs e) => MessageBox.Show("Changer la résolution");
+        private void ChangerResolution(int largeur, int hauteur)
+        {
+            if (largeur > 0 && hauteur > 0)
+            {
+                this.ClientSize = new Size(largeur, hauteur);
+            }
+            
+        }
 
         private void ChangerLangue(int nouvelleLangue)
         {
@@ -347,8 +366,6 @@ namespace StageCode
                 item.Font = new Font(item.Font.FontFamily, fontSize);
             }
         }
-
-
 
         #endregion
 
