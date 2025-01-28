@@ -164,7 +164,11 @@ namespace StageCode
                     newToolStripMenuItem.Text = "New";
                     openToolStripMenuItem.Text = "Open";
                     saveToolStripMenuItem.Text = "Save";
-                    btnInfos.Text = "Info"; // Texte pour btnInfos
+                    btnInfos.Text = "Info";
+
+                    // Menu Infos
+                    controlCommentToolStripMenuItem.Text = "Control Comment";
+                    aboutToolStripMenuItem.Text = "About";
 
                     // Menu Edit
                     btnEdition.DropDownItems[0].Text = "Cut";
@@ -187,7 +191,11 @@ namespace StageCode
                     newToolStripMenuItem.Text = "新建";
                     openToolStripMenuItem.Text = "打开";
                     saveToolStripMenuItem.Text = "保存";
-                    btnInfos.Text = "信息"; // Texte pour btnInfos
+                    btnInfos.Text = "信息";
+
+                    // Menu Infos
+                    controlCommentToolStripMenuItem.Text = "控制评论";
+                    aboutToolStripMenuItem.Text = "关于";
 
                     // Menu Edit
                     btnEdition.DropDownItems[0].Text = "剪切";
@@ -210,7 +218,11 @@ namespace StageCode
                     newToolStripMenuItem.Text = "Neu";
                     openToolStripMenuItem.Text = "Öffnen";
                     saveToolStripMenuItem.Text = "Speichern";
-                    btnInfos.Text = "Info"; // Texte pour btnInfos
+                    btnInfos.Text = "Info";
+
+                    // Menu Infos
+                    controlCommentToolStripMenuItem.Text = "Kontrollkommentar";
+                    aboutToolStripMenuItem.Text = "Über";
 
                     // Menu Edit
                     btnEdition.DropDownItems[0].Text = "Ausschneiden";
@@ -233,7 +245,11 @@ namespace StageCode
                     newToolStripMenuItem.Text = "Nouveau";
                     openToolStripMenuItem.Text = "Ouvrir";
                     saveToolStripMenuItem.Text = "Enregistrer";
-                    btnInfos.Text = "Infos"; // Texte pour btnInfos
+                    btnInfos.Text = "Infos";
+
+                    // Menu Infos
+                    controlCommentToolStripMenuItem.Text = "Contrôle Commentaire";
+                    aboutToolStripMenuItem.Text = "À propos";
 
                     // Menu Edit
                     btnEdition.DropDownItems[0].Text = "Couper";
@@ -256,7 +272,11 @@ namespace StageCode
                     newToolStripMenuItem.Text = "Naujas";
                     openToolStripMenuItem.Text = "Atidaryti";
                     saveToolStripMenuItem.Text = "Išsaugoti";
-                    btnInfos.Text = "Informacija"; // Texte pour btnInfos
+                    btnInfos.Text = "Informacija";
+
+                    // Menu Infos
+                    controlCommentToolStripMenuItem.Text = "Kontrolės komentaras";
+                    aboutToolStripMenuItem.Text = "Apie";
 
                     // Menu Edit
                     btnEdition.DropDownItems[0].Text = "Pjauti";
@@ -273,7 +293,6 @@ namespace StageCode
                     break;
             }
         }
-
         #endregion
     }
 }
