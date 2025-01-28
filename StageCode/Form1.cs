@@ -149,6 +149,37 @@ namespace StageCode
 
         private void VerifierVisibilite(object sender, EventArgs e) => MessageBox.Show("Vérifier la visibilité");
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            switch (Langue)
+            {
+                case 1: // English
+                    MessageBox.Show("Designer synoptic version: " + Application.ProductVersion);
+                    break;
+
+                case 2: // Chinese
+                    MessageBox.Show("设计师概览版本: " + Application.ProductVersion);
+                    break;
+
+                case 3: // German
+                    MessageBox.Show("Designer Synoptik Version: " + Application.ProductVersion);
+                    break;
+
+                case 4: // French
+                    MessageBox.Show("Version du designer synoptique : " + Application.ProductVersion);
+                    break;
+
+                case 5: // Lithuanian
+                    MessageBox.Show("Sinoptinio dizainerio versija: " + Application.ProductVersion);
+                    break;
+
+                default:
+                    MessageBox.Show("Designer synoptic version: " + Application.ProductVersion);
+                    break;
+            }
+        }
+
+
         #endregion
 
         #region Appliquer la langue

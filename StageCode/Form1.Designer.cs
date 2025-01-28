@@ -37,11 +37,11 @@
             btnEdition = new ToolStripMenuItem();
             btnView = new ToolStripMenuItem();
             btnInfos = new ToolStripMenuItem();
+            controlCommentToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
             btnVersion = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
-            controlCommentToolStripMenuItem = new ToolStripMenuItem();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
             MainMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -104,17 +104,6 @@
             btnInfos.Size = new Size(45, 20);
             btnInfos.Text = "Infos";
             // 
-            // btnVersion
-            // 
-            btnVersion.Enabled = false;
-            btnVersion.Name = "btnVersion";
-            btnVersion.Size = new Size(29, 20);
-            btnVersion.Text = "V ";
-            // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
-            // 
             // controlCommentToolStripMenuItem
             // 
             controlCommentToolStripMenuItem.Name = "controlCommentToolStripMenuItem";
@@ -126,6 +115,18 @@
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new Size(180, 22);
             aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            // 
+            // btnVersion
+            // 
+            btnVersion.Enabled = false;
+            btnVersion.Name = "btnVersion";
+            btnVersion.Size = new Size(29, 20);
+            btnVersion.Text = "V ";
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
