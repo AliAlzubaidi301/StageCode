@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CButtonLib;
+using CONT1Lib;
+using ReticuleLib;
+using System;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -17,7 +20,7 @@ namespace StageCode
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var a = new AM60();
+            var a = new AM601();
 
             string tmp = Application.ProductVersion[0].ToString();
             tmp += Application.ProductVersion[1].ToString();
@@ -154,18 +157,11 @@ namespace StageCode
 
         private void ExportControlToXml(Control control, StringBuilder xmlContent)
         {
-            if (control is AM60 am60Control)
+            if (control is AM601 am60Control)
             {
-                xmlContent.AppendLine($"  <Component name=\"{control.Name}\">");
+                AM601 am60 = am60Control as AM601;
 
-                xmlContent.AppendLine("    <Apparence>");
-                xmlContent.AppendLine($"      <Backcolor value=\"{am60Control.BackColor.Name.ToLower()}\"/>");
-                xmlContent.AppendLine($"      <Visibility value=\"{am60Control.Visibility}\"/>");
-                xmlContent.AppendLine($"      <LevelVisible value=\"{am60Control.LevelVisible}\"/>");
-                xmlContent.AppendLine($"      <LevelEnabled value=\"{am60Control.LevelEnabled}\"/>");
-                xmlContent.AppendLine($"      <Detecteur value=\"{am60Control.Detecteur}\"/>");
-                xmlContent.AppendLine("    </Apparence>");
-                xmlContent.AppendLine("  </Component>");
+                xmlContent.Append(am60.WriteFileXML());
             }
         }
 
@@ -332,6 +328,68 @@ namespace StageCode
             }
         }
 
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Ouvrir un fichier"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Lire le contenu du fichier XML
+                    string fileContent = LireXML(openFileDialog.FileName);
+
+                    // Appeler la fonction pour traiter le fichier XML en fonction du type d'objet
+                    RecupererContenuXML(fileContent);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Une erreur est survenue lors de l'ouverture du fichier : {ex.Message}", "Erreur");
+                }
+            }
+        }
+
+        private string LireXML(string filePath)
+        {
+            try
+            {
+                string xmlContent = File.ReadAllText(filePath);
+                return xmlContent;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur lors de la lecture du fichier XML : {ex.Message}");
+            }
+        }
+
+        private void RecupererContenuXML(string xmlContent)
+        {
+            try
+            {
+                XElement xml = XElement.Parse(xmlContent);
+
+                foreach (XElement component in xml.Elements("Component"))
+                {
+                    string type = component.Attribute("type")?.Value;
+
+                    if (type == "AM60")
+                    {
+                        AM601 am60Control = new AM601();
+                        am60Control = am60Control.ReadFileXML(component.ToString());  
+
+                        Controls.Add(am60Control);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Une erreur est survenue lors du traitement du fichier XML : {ex.Message}", "Erreur");
+            }
+        }
 
         #endregion
 
@@ -498,9 +556,7 @@ namespace StageCode
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var a = new AM60();
-            a.BackColor = Color.Red;
-            this.Controls.Add(a);
+
         }
     }
 }

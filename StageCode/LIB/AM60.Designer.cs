@@ -1,6 +1,6 @@
 ﻿namespace StageCode
 {
-    partial class AM60
+    partial class AM601
     {
         /// <summary>
         /// Required designer variable.
@@ -32,11 +32,13 @@
             // 
             // AM60
             // 
-            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            Font = new Font("Microsoft Sans Serif", 8.25F);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "AM60";
+            Size = new Size(175, 173);
+            Load += AM60_Load;
             ResumeLayout(false);
         }
 

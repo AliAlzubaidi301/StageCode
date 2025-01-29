@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace StageCode
 {
-    public partial class AM60 : UserControl
+    public partial class AM601 : UserControl
     {
         #region "Orthodyne Data"
         private int _LevelVisible = 0;
@@ -27,12 +28,37 @@ namespace StageCode
         public event EventHandler VisibilityChanged;
 
         #region "Read/Write on .syn file"
-        public AM60 ReadFile(string[] splitPvirgule, string comment, string file, bool FromCopy)
+        public AM601 ReadFileXML(string xmlText)
+        {
+            XElement xml = XElement.Parse(xmlText);
+
+            AM601 am60Control = new AM601();
+
+            string type = xml.Attribute("type")?.Value;
+            am60Control.Name = xml.Attribute("name")?.Value;
+
+            // Parse the <Apparence> section
+            XElement appearance = xml.Element("Apparence");
+            if (appearance != null)
+            {
+                // Extract values from the <Apparence> section
+                am60Control.BackColor = System.Drawing.Color.FromName(appearance.Element("Backcolor")?.Attribute("value")?.Value ?? "Transparent");
+                am60Control.LevelVisible = int.Parse(appearance.Element("LevelVisible")?.Attribute("value")?.Value ?? "0");
+                am60Control.LevelEnabled = int.Parse(appearance.Element("LevelEnabled")?.Attribute("value")?.Value ?? "0");
+                am60Control.Detecteur = appearance.Element("Detecteur")?.Attribute("value")?.Value ?? "";
+                am60Control.Visibility = appearance.Element("Visibility")?.Attribute("value")?.Value ?? "Visible";
+            }
+
+            // Return the populated AM60 object
+            return am60Control;
+        }
+        public AM601 ReadFile(string[] splitPvirgule, string comment, string file, bool fromCopy)
         {
             this._comment = comment;
             this.Name = splitPvirgule[1];
             this.Size = new Size(int.Parse(splitPvirgule[3]), int.Parse(splitPvirgule[2]));
-            if (FromCopy)
+
+            if (fromCopy)
             {
                 this.Location = new Point(int.Parse(splitPvirgule[5]) + 10, int.Parse(splitPvirgule[4]) + 10);
             }
@@ -40,20 +66,45 @@ namespace StageCode
             {
                 this.Location = new Point(int.Parse(splitPvirgule[5]), int.Parse(splitPvirgule[4]));
             }
+
             this.LevelVisible = int.Parse(splitPvirgule[7]);
             this.LevelEnabled = int.Parse(splitPvirgule[8]);
             this.Detecteur = splitPvirgule[6];
+
             if (splitPvirgule.Length >= 10)
             {
                 this.Visibility = splitPvirgule[9];
             }
+
             return this;
+        }
+
+        public string WriteFileXML()
+        {
+            var xmlContent = new StringBuilder();
+
+            xmlContent.AppendLine($"<Component type=\"{this.GetType().Name}\" name=\"{this.Name}\">");
+
+            // Section Apparence
+            xmlContent.AppendLine("  <Apparence>");
+            xmlContent.AppendLine($"    <Backcolor value=\"{this.BackColor.Name.ToLower()}\"/>");
+            xmlContent.AppendLine($"    <LevelVisible value=\"{this.LevelVisible}\"/>");
+            xmlContent.AppendLine($"    <LevelEnabled value=\"{this.LevelEnabled}\"/>");
+            xmlContent.AppendLine($"    <Detecteur value=\"{this.Detecteur}\"/>");
+            xmlContent.AppendLine($"    <Visibility value=\"{this.Visibility}\"/>");
+            xmlContent.AppendLine("  </Apparence>");
+
+            xmlContent.AppendLine("</Component>");
+
+            return xmlContent.ToString();
         }
 
         public string WriteFile()
         {
             return $"AM60;{this.Name};{this.Size.Height};{this.Size.Width};{this.Location.Y};{this.Location.X};{this.Detecteur};{this.LevelVisible};{this.LevelEnabled};{this.Visibility}";
         }
+
+
         #endregion
 
         #region "Control Properties"
@@ -319,9 +370,14 @@ namespace StageCode
             return this.GetType();
         }
 
-        public AM60()
+        public AM601()
         {
             InitializeComponent();
+        }
+
+        private void AM60_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
