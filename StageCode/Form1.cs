@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace StageCode
 {
     public partial class Form1 : Form
     {
         public static int Langue = 1; // 1 = English, 2 = Chinese, 3 = German, 4 = French, 5 = Lithuanian
+        private Form1 frm;
 
         public Form1()
         {
@@ -14,6 +17,8 @@ namespace StageCode
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            var a = new AM60();
+
             string tmp = Application.ProductVersion[0].ToString();
             tmp += Application.ProductVersion[1].ToString();
             tmp += Application.ProductVersion[2].ToString();
@@ -86,7 +91,7 @@ namespace StageCode
 
         private void AjouterMenuVew()
         {
-            ToolStripMenuItem resolutionMenuItem = CreerMenuItem("Resolution", null,null);
+            ToolStripMenuItem resolutionMenuItem = CreerMenuItem("Resolution", null, null);
 
             ToolStripMenuItem resolution1 = CreerMenuItem("Resolution 1 (640x480)", null, (sender, e) => ChangerResolution(640, 480));
             ToolStripMenuItem resolution2 = CreerMenuItem("Resolution 2 (800x600)", null, (sender, e) => ChangerResolution(800, 600));
@@ -130,6 +135,40 @@ namespace StageCode
 
         #region Méthodes Utilitaires
 
+        public void ExportFormToXml(Form form, string filePath)
+        {
+            StringBuilder xmlContent = new StringBuilder();
+
+            xmlContent.AppendLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            xmlContent.AppendLine("<Syno name=\"settings\">");
+
+            foreach (Control control in form.Controls)
+            {
+                ExportControlToXml(control, xmlContent);
+            }
+
+            xmlContent.AppendLine("</Syno>");
+
+            File.WriteAllText(filePath, xmlContent.ToString());
+        }
+
+        private void ExportControlToXml(Control control, StringBuilder xmlContent)
+        {
+            if (control is AM60 am60Control)
+            {
+                xmlContent.AppendLine($"  <Component name=\"{control.Name}\">");
+
+                xmlContent.AppendLine("    <Apparence>");
+                xmlContent.AppendLine($"      <Backcolor value=\"{am60Control.BackColor.Name.ToLower()}\"/>");
+                xmlContent.AppendLine($"      <Visibility value=\"{am60Control.Visibility}\"/>");
+                xmlContent.AppendLine($"      <LevelVisible value=\"{am60Control.LevelVisible}\"/>");
+                xmlContent.AppendLine($"      <LevelEnabled value=\"{am60Control.LevelEnabled}\"/>");
+                xmlContent.AppendLine($"      <Detecteur value=\"{am60Control.Detecteur}\"/>");
+                xmlContent.AppendLine("    </Apparence>");
+                xmlContent.AppendLine("  </Component>");
+            }
+        }
+
         private ToolStripMenuItem CreerMenuItem(string text, Keys? shortcutKeys, EventHandler? clickEvent)
         {
             ToolStripMenuItem menuItem = new ToolStripMenuItem(text);
@@ -145,7 +184,46 @@ namespace StageCode
         #endregion
 
         #region Actions des menus
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string message = "";
+            string title = "";
 
+            switch (Langue)
+            {
+                case 1: // English
+                    message = "Save the changes?";
+                    title = "Save";
+                    break;
+                case 2: // Chinese
+                    message = "保存更改？";
+                    title = "保存";
+                    break;
+                case 3: // German
+                    message = "Änderungen speichern?";
+                    title = "Speichern";
+                    break;
+                case 4: // French
+                    message = "Enregistrer les modifications ?";
+                    title = "Enregistrer";
+                    break;
+                case 5: // Lithuanian
+                    message = "Išsaugoti pakeitimus?";
+                    title = "Išsaugoti";
+                    break;
+            }
+
+            DialogResult r = MessageBox.Show(message, title, MessageBoxButtons.YesNoCancel);
+
+            if (r == DialogResult.Yes)
+            {
+                ExportFormToXml(this, "A.txt");
+            }
+            else if (r == DialogResult.No)
+            {
+
+            }
+        }
         private void Couper(object sender, EventArgs e)
         {
             if (ActiveControl is TextBox textBox && !string.IsNullOrEmpty(textBox.SelectedText))
@@ -418,5 +496,11 @@ namespace StageCode
 
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var a = new AM60();
+            a.BackColor = Color.Red;
+            this.Controls.Add(a);
+        }
     }
 }
