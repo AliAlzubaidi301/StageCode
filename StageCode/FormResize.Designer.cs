@@ -34,10 +34,12 @@
             label2 = new Label();
             label1 = new Label();
             groupBoxApres = new GroupBox();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
             label4 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            btnOK = new Button();
+            btnResize = new Button();
             groupBoxAvant.SuspendLayout();
             groupBoxApres.SuspendLayout();
             SuspendLayout();
@@ -50,7 +52,7 @@
             groupBoxAvant.Controls.Add(label1);
             groupBoxAvant.Location = new Point(12, 12);
             groupBoxAvant.Name = "groupBoxAvant";
-            groupBoxAvant.Size = new Size(200, 100);
+            groupBoxAvant.Size = new Size(201, 100);
             groupBoxAvant.TabIndex = 0;
             groupBoxAvant.TabStop = false;
             groupBoxAvant.Text = "groupBox1";
@@ -104,6 +106,20 @@
             groupBoxApres.TabStop = false;
             groupBoxApres.Text = "groupBox2";
             // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(141, 69);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(38, 23);
+            textBox2.TabIndex = 5;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(141, 31);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(38, 23);
+            textBox1.TabIndex = 4;
+            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -122,25 +138,33 @@
             label3.TabIndex = 2;
             label3.Text = "label3";
             // 
-            // textBox1
+            // btnOK
             // 
-            textBox1.Location = new Point(141, 31);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(38, 23);
-            textBox1.TabIndex = 4;
+            btnOK.Location = new Point(12, 238);
+            btnOK.Name = "btnOK";
+            btnOK.Size = new Size(75, 23);
+            btnOK.TabIndex = 2;
+            btnOK.Text = "button1";
+            btnOK.UseVisualStyleBackColor = true;
+            btnOK.Click += btnOK_Click;
             // 
-            // textBox2
+            // btnResize
             // 
-            textBox2.Location = new Point(141, 69);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(38, 23);
-            textBox2.TabIndex = 5;
+            btnResize.Location = new Point(137, 238);
+            btnResize.Name = "btnResize";
+            btnResize.Size = new Size(75, 23);
+            btnResize.TabIndex = 3;
+            btnResize.Text = "button2";
+            btnResize.UseVisualStyleBackColor = true;
+            btnResize.Click += btnResize_Click;
             // 
             // FormResize
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(220, 234);
+            ClientSize = new Size(225, 277);
+            Controls.Add(btnResize);
+            Controls.Add(btnOK);
             Controls.Add(groupBoxApres);
             Controls.Add(groupBoxAvant);
             Name = "FormResize";
@@ -165,5 +189,7 @@
         private Label label5;
         private TextBox textBox2;
         private TextBox textBox1;
+        private Button btnOK;
+        private Button btnResize;
     }
 }

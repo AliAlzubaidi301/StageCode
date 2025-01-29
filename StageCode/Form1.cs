@@ -146,40 +146,62 @@ namespace StageCode
 
         #region Actions des menus
 
-        private void Couper(object sender, EventArgs e) => MessageBox.Show("Couper");
-
+        private void Couper(object sender, EventArgs e)
+        {
+            if (ActiveControl is TextBox textBox && !string.IsNullOrEmpty(textBox.SelectedText))
+            {
+                Clipboard.SetText(textBox.SelectedText);
+                textBox.SelectedText = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Aucun texte sélectionné à couper.");
+            }
+        }
         private void Copier(object sender, EventArgs e)
         {
-           
+            if (ActiveControl is TextBox textBox && !string.IsNullOrEmpty(textBox.SelectedText))
+            {
+                Clipboard.SetText(textBox.SelectedText);
+            }
+            else
+            {
+                MessageBox.Show("Aucun texte sélectionné à copier.");
+            }
         }
 
         private void Coller(object sender, EventArgs e)
         {
-            string[] cplignes;
-          //  FormChargement chargement = new FormChargement();
-
-            cplignes = Clipboard.GetText().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-
-            // Affiche le formulaire de chargement
-         //   chargement.Show(cplignes.Length);
-
-            // Appelle la méthode pour charger les lignes
-           // ChargerFichier(cplignes, chargement, true);
-
-            // Ferme le formulaire de chargement une fois le traitement terminé
-           // chargement.Close();
-
+            if (ActiveControl is TextBox textBox && Clipboard.ContainsText())
+            {
+                textBox.Paste();
+            }
+            else
+            {
+                MessageBox.Show("Aucun texte à coller.");
+            }
         }
-
-        private void Supprimer(object sender, EventArgs e) => MessageBox.Show("Supprimer");
-
+        private void Supprimer(object sender, EventArgs e)
+        {
+            if (ActiveControl is TextBox textBox && !string.IsNullOrEmpty(textBox.SelectedText))
+            {
+                textBox.SelectedText = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Aucun texte sélectionné à supprimer.");
+            }
+        }
         private void RedimensionnerSynoptique(object sender, EventArgs e)
         {
-            FormResize forme = new FormResize();
+            FormResize forme = new FormResize(this);
             forme.ShowDialog();
         }
 
-        private void Proteger(object sender, EventArgs e) => MessageBox.Show("Protégé");
+        private void Proteger(object sender, EventArgs e)
+        {
+            MessageBox.Show("Protégé");
+        }
 
         private void ChangerResolution(int largeur, int hauteur)
         {
@@ -188,9 +210,7 @@ namespace StageCode
                 this.ClientSize = new Size(largeur, hauteur);
 
                 Form1_ClientSizeChanged(new object(), new EventArgs());
-                    
             }
-            
         }
 
         private void ChangerLangue(int nouvelleLangue)
@@ -199,7 +219,10 @@ namespace StageCode
             AppliquerLangue();
         }
 
-        private void VerifierVisibilite(object sender, EventArgs e) => MessageBox.Show("Vérifier la visibilité");
+        private void VerifierVisibilite(object sender, EventArgs e)
+        {
+            MessageBox.Show("Vérifier la visibilité");
+        }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
