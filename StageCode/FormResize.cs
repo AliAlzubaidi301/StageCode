@@ -13,24 +13,19 @@ namespace StageCode
             InitializeComponent();
             this.forme = forme;
 
-            // Configurer les ancres pour tous les contrôles
             ConfigureAnchors();
 
-            // Abonner l'événement SizeChanged pour ajuster les tailles des GroupBox
             this.SizeChanged += FormResize_SizeChanged;
         }
 
         private void ConfigureAnchors()
         {
-            // Configuration des ancres pour les GroupBox
             this.groupBoxAvant.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             this.groupBoxApres.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
-            // Configuration des ancres pour les boutons
             this.btnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             this.btnResize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-            // Configuration des ancres pour les labels et textboxes
             this.label1.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.label2.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.label5.Anchor = AnchorStyles.Top | AnchorStyles.Left;
@@ -41,17 +36,17 @@ namespace StageCode
 
         private void FormResize_SizeChanged(object sender, EventArgs e)
         {
-            // Ajuster la hauteur des GroupBox en fonction de la taille du formulaire
-            int groupBoxHeight = (int)(this.ClientSize.Height * 0.34); // 34% de la hauteur du formulaire
+            int groupBoxHeight = (int)(this.ClientSize.Height * 0.34); 
             this.groupBoxAvant.Height = groupBoxHeight;
             this.groupBoxApres.Height = groupBoxHeight;
 
-            // Repositionner le deuxième GroupBox sous le premier
             this.groupBoxApres.Top = this.groupBoxAvant.Bottom + 10;
 
-            // Repositionner les boutons en bas du formulaire
             this.btnOK.Top = this.ClientSize.Height - this.btnOK.Height - 20;
             this.btnResize.Top = this.ClientSize.Height - this.btnResize.Height - 20;
+
+            ConfigureAnchors();
+
         }
 
         private void FormResize_Load(object sender, EventArgs e)
