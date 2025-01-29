@@ -148,9 +148,28 @@ namespace StageCode
 
         private void Couper(object sender, EventArgs e) => MessageBox.Show("Couper");
 
-        private void Copier(object sender, EventArgs e) => MessageBox.Show("Copier");
+        private void Copier(object sender, EventArgs e)
+        {
+           
+        }
 
-        private void Coller(object sender, EventArgs e) => MessageBox.Show("Coller");
+        private void Coller(object sender, EventArgs e)
+        {
+            string[] cplignes;
+          //  FormChargement chargement = new FormChargement();
+
+            cplignes = Clipboard.GetText().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+
+            // Affiche le formulaire de chargement
+         //   chargement.Show(cplignes.Length);
+
+            // Appelle la méthode pour charger les lignes
+           // ChargerFichier(cplignes, chargement, true);
+
+            // Ferme le formulaire de chargement une fois le traitement terminé
+           // chargement.Close();
+
+        }
 
         private void Supprimer(object sender, EventArgs e) => MessageBox.Show("Supprimer");
 
